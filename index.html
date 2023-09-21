@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <h1>Tudelu</h1>
+  <todo-list></todo-list>
+  <script type="module" src="./todo-list.js"></script>
+  <script type="module" src="./todo-item.js"></script>
+  <script type="module">
+    import { EventBus } from "./event-bus.js";
+
+    const event = new CustomEvent("todo-items:replace", {
+      bubbles: true,
+      detail: [
+        { completed: false, text: "Lorem ipsum dolor sit amet", uuid: window.crypto.randomUUID() },
+        { completed: false, text: "Ut enim ad minim veniam", uuid: window.crypto.randomUUID() },
+        { completed: false, text: "Duis aute irure dolor in reprehenderit", uuid: window.crypto.randomUUID() },
+        { completed: false, text: "Excepteur sint occaecat cupidatat non proident", uuid: window.crypto.randomUUID() },
+      ]
+    });
+    EventBus.emit(event);
+    // OR:
+    //    const todoList = document.querySelector("todo-list");
+    //    window.addEventListener("load", () => document.dispatchEvent(event));
+  </script>
+</body>
+<style>
+  body {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    color: #333;
+  }
+
+  h1 {
+    font-family: Chalkboard;
+    font-size: 48px;
+    color: firebrick;
+    text-shadow: 1px 1px 0 black;
+  }
+
+  todo-list {
+    margin-top: 32px;
+  }
+</style>
+
+</html>
